@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="UniTech Campus Store - Hệ thống cung cấp thiết bị và phụ kiện công nghệ thông minh trợ giá dành riêng cho sinh viên Đại học Lạc Hồng (LHU)." />
+  <meta name="keywords" content="UniTech, Thiết bị sinh viên, LHU, Đại học Lạc Hồng, phụ kiện lập trình, bàn phím cơ, chuột silent, sạc GaN, tai nghe chống ồn" />
+  <meta name="author" content="Đinh Hữu Phước - Học phần 111101 Thiết Kế Web" />
+  <title>UniTech - Campus Store | Công Nghệ Cho Sinh Viên LHU</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ================= TOP ANNOUNCEMENT BAR ================= -->
+  <div class="top-announcement-bar">
+    <div class="container announcement-content">
+      <div class="announcement-left">
+        <span class="badge-student">🎓 LHU Campus</span>
+        <span>Chào mừng sinh viên Đại học Lạc Hồng! Nhập mã <strong>SINHVIEN10</strong> để được giảm ngay 10% đơn hàng.</span>
+      </div>
+      <div class="announcement-right">
+        <a href="#student-policy" class="announcement-link"><i class="bi bi-shield-check"></i> Trợ giá sinh viên</a>
+        <a href="#student-policy" class="announcement-link"><i class="bi bi-geo-alt"></i> Giao tận KTX LHU</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SITE HEADER & NAVIGATION ================= -->
+  <header class="site-header" id="site-header">
+    <div class="container navbar-container">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" aria-label="UniTech Trang chủ">
+        <div class="logo-icon-wrap">
+          <i class="bi bi-cpu-fill"></i>
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-name">Uni<span class="text-primary">Tech</span></span>
+          <span class="logo-sub">Campus Store · LHU</span>
+        </div>
+      </a>
+
+      <!-- Real-time Live Search Bar (Thử thách 2) -->
+      <div class="header-search-wrap">
+        <div class="search-input-box">
+          <i class="bi bi-search search-icon"></i>
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Tìm kiếm chuột, bàn phím, sạc GaN, tai nghe..." 
+            autocomplete="off"
+            aria-label="Tìm kiếm sản phẩm"
+          />
+          <button type="button" id="btn-clear-search" class="btn-clear-search" aria-label="Xóa từ khóa tìm kiếm" style="display: none;">
+            <i class="bi bi-x-circle-fill"></i>
+          </button>
+        </div>
+        <span class="search-hint"><kbd>Real-time Search</kbd> Gõ để tìm tức thì</span>
+      </div>
+
+      <!-- Header Actions: Voucher Pill & Cart Button -->
+      <div class="header-actions">
+        <div class="voucher-quick-pill" onclick="App.handleApplyVoucher('SINHVIEN10')" title="Bấm để sao chép mã">
+          <i class="bi bi-ticket-perforated-fill"></i>
+          <div class="voucher-info">
+            <span class="code">SINHVIEN10</span>
+            <span class="desc">Giảm 10%</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-cart-trigger" id="btn-open-cart" aria-label="Mở giỏ hàng">
+          <div class="cart-icon-wrapper">
+            <i class="bi bi-bag"></i>
+            <span class="cart-badge" id="cart-badge">0</span>
+          </div>
+          <span class="cart-trigger-label">Giỏ hàng</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="site-main">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="bi bi-mortarboard-fill"></i>
+            <span>Dự án PBL Học phần 111101 · Thiết Kế Web LHU</span>
+          </div>
+          <h1 class="hero-title">
+            Thiết Bị Học Tập & Lập Trình Cho <span class="gradient-text">Sinh Viên Lạc Hồng</span>
+          </h1>
+          <p class="hero-desc">
+            Nâng cấp góc học tập tại phòng trọ & ký túc xá với hệ sinh thái phụ kiện công nghệ chuẩn công thái học: 
+            Chuột không dây silent học thư viện, phím cơ gõ code êm ái, sạc nhanh GaN và đèn bảo vệ mắt.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#product-section" class="btn btn-primary btn-lg">
+              <i class="bi bi-lightning-charge-fill"></i> Khám phá sản phẩm
+            </a>
+            <button type="button" class="btn btn-outline btn-lg" onclick="App.handleApplyVoucher('SINHVIEN10')">
+              <i class="bi bi-ticket-detailed"></i> Nhận mã SINHVIEN10
+            </button>
+          </div>
+
+          <!-- Trust highlights -->
+          <div class="hero-features">
+            <div class="feature-item">
+              <i class="bi bi-tag-fill text-primary"></i>
+              <span>Trợ giá sinh viên đến 35%</span>
+            </div>
+            <div class="feature-item">
+              <i class="bi bi-shield-fill-check text-success"></i>
+              <span>Bảo hành 1 đổi 1 trong 12T</span>
+            </div>
+            <div class="feature-item">
+              <i class="bi bi-truck text-info"></i>
+              <span>Giao miễn phí tận KTX</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card-showcase">
+            <div class="showcase-glow"></div>
+            <img 
+              src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=800&auto=format&fit=crop&q=80" 
+              alt="Setup góc học tập lập trình sinh viên" 
+              class="hero-img"
+            />
+            <div class="floating-badge badge-top">
+              <i class="bi bi-code-slash"></i>
+              <span>Tối ưu cho Coder & Lập Trình Viên</span>
+            </div>
+            <div class="floating-badge badge-bottom">
+              <i class="bi bi-stars text-warning"></i>
+              <span>100% Dynamic JavaScript Render</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTER & PRODUCT SECTION -->
+    <section class="products-section" id="product-section">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Danh Mục Thiết Bị Công Nghệ</h2>
+            <p class="section-subtitle">Toàn bộ sản phẩm được render động từ mảng dữ liệu JavaScript (Tuần 12 - 13)</p>
+          </div>
+
+          <!-- Toolbar: Product Count & Sort -->
+          <div class="section-toolbar">
+            <div class="product-stats" id="product-count-display">
+              Đang tải danh sách sản phẩm...
+            </div>
+            <div class="sort-select-box">
+              <label for="sort-select"><i class="bi bi-arrow-down-up"></i> Sắp xếp:</label>
+              <select id="sort-select" class="sort-select">
+                <option value="default">Mặc định (Nổi bật)</option>
+                <option value="price-asc">Giá: Thấp đến Cao</option>
+                <option value="price-desc">Giá: Cao đến Thấp</option>
+                <option value="rating-desc">Đánh giá cao nhất (⭐ 5.0)</option>
+                <option value="discount-desc">Giảm giá nhiều nhất (%)</option>
+                <option value="name-asc">Tên sản phẩm: A - Z</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Tabs Filter -->
+        <nav class="category-tabs" id="category-tabs-container" aria-label="Bộ lọc danh mục">
+          <button type="button" class="cat-tab-btn active" data-category="all">
+            <i class="bi bi-grid-fill"></i> Tất cả sản phẩm
+          </button>
+          <button type="button" class="cat-tab-btn" data-category="mouse-keyboard">
+            <i class="bi bi-keyboard"></i> Chuột & Bàn phím
+          </button>
+          <button type="button" class="cat-tab-btn" data-category="audio">
+            <i class="bi bi-headphones"></i> Âm thanh & Tai nghe
+          </button>
+          <button type="button" class="cat-tab-btn" data-category="charging">
+            <i class="bi bi-lightning-charge"></i> Cáp sạc & GaN
+          </button>
+          <button type="button" class="cat-tab-btn" data-category="accessories">
+            <i class="bi bi-laptop"></i> Setup bàn học & Hub
+          </button>
+        </nav>
+
+        <!-- THỬ THÁCH 1: PRODUCT GRID HOÀN TOÀN TRỐNG, RENDER ĐỘNG TỪ DATA.JS -->
+        <div id="product-grid" class="product-grid" aria-live="polite">
+          <!-- Các thẻ sản phẩm sẽ được hàm UI.renderProducts() sinh động từ mảng PRODUCTS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STUDENT BENEFITS & CAMPUS POLICY SECTION -->
+    <section class="campus-policy-section" id="student-policy">
+      <div class="container">
+        <div class="policy-card">
+          <div class="policy-header">
+            <span class="policy-tag">Cam kết LHU Student Support</span>
+            <h3 class="policy-title">Đặc Quyền Mua Sắm Dành Riêng Cho Sinh Viên Lạc Hồng</h3>
+          </div>
+          <div class="policy-grid">
+            <div class="policy-item">
+              <div class="policy-icon"><i class="bi bi-credit-card-2-front"></i></div>
+              <h4>Trợ Giá Có Thẻ Sinh Viên</h4>
+              <p>Chỉ cần có MSSV Đại học Lạc Hồng, bạn được giảm trực tiếp thêm 10% cùng nhiều voucher tích lũy.</p>
+            </div>
+            <div class="policy-item">
+              <div class="policy-icon"><i class="bi bi-box-seam"></i></div>
+              <h4>Giao Tận Nơi Ký Túc Xá</h4>
+              <p>Đơn hàng được giao miễn phí tận phòng trọ hoặc các cơ sở 1, 2, 5 của Trường Đại học Lạc Hồng.</p>
+            </div>
+            <div class="policy-item">
+              <div class="policy-icon"><i class="bi bi-wrench-adjustable"></i></div>
+              <h4>Bảo Hành 1 Đổi 1 Hỗ Trợ 24/7</h4>
+              <p>Lỗi kỹ thuật trong 30 ngày đổi mới ngay lập tức, không làm gián đoạn việc học tập và nộp bài tập lớn.</p>
+            </div>
+            <div class="policy-item">
+              <div class="policy-icon"><i class="bi bi-people"></i></div>
+              <h4>Mô Hình Vibe Coding & Scrum</h4>
+              <p>Dự án được xây dựng theo chuẩn Agile PBL với 3 modules tách biệt (`data.js`, `ui.js`, `app.js`).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-col footer-about">
+        <div class="brand-logo footer-logo">
+          <div class="logo-icon-wrap"><i class="bi bi-cpu-fill"></i></div>
+          <div class="logo-text-wrap">
+            <span class="logo-name">Uni<span class="text-primary">Tech</span></span>
+            <span class="logo-sub">Campus Store</span>
+          </div>
+        </div>
+        <p class="footer-text">
+          Dự án PBL (Project-Based Learning) - Học phần <strong>111101 · Thiết Kế Web</strong>.<br />
+          Khoa Công Nghệ Thông Tin – Trường Đại học Lạc Hồng.
+        </p>
+        <div class="footer-meta">
+          <span>Sinh viên thực hiện: <strong>Đinh Hữu Phước</strong></span>
+          <span>MSSV: <strong>125000155</strong></span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Cấu Trúc Hệ Thống (Clean Code)</h4>
+        <ul class="footer-links">
+          <li><code>js/data.js</code>: Dữ liệu mảng Object</li>
+          <li><code>js/ui.js</code>: Render DOM & Modals</li>
+          <li><code>js/app.js</code>: Xử lý logic & Real-time</li>
+          <li><code>PLAN.md</code>: Kế hoạch Agile/Scrum</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Thử Thách Kỹ Thuật (Tuần 13)</h4>
+        <ul class="footer-links">
+          <li><i class="bi bi-check-circle-fill text-success"></i> Thử thách 1: Dynamic Render</li>
+          <li><i class="bi bi-check-circle-fill text-success"></i> Thử thách 2: Real-time Live Search</li>
+          <li><i class="bi bi-check-circle-fill text-success"></i> Thử thách 3: Real-time Form Validation</li>
+          <li><i class="bi bi-check-circle-fill text-success"></i> Lưu trữ giỏ hàng LocalStorage</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Liên Hệ Hỗ Trợ</h4>
+        <ul class="footer-contact-list">
+          <li><i class="bi bi-geo-alt-fill"></i> Số 10 Huỳnh Văn Nghệ, P. Bửu Long, TP. Biên Hòa, Đồng Nai</li>
+          <li><i class="bi bi-envelope-fill"></i> 125000155@lachong.edu.vn</li>
+          <li><i class="bi bi-github"></i> github.com/huuphuocgith2802</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="container footer-bottom-content">
+        <p>© 2026 UniTech Campus Store · HỌC PHẦN 111101 THIẾT KẾ WEB · ĐẠI HỌC LẠC HỒNG.</p>
+        <p class="sprint-tag">Sprint 1: Planning & Core UI Completed</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODAL: QUICK VIEW PRODUCT DETAIL ================= -->
+  <div class="modal-overlay" id="product-detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-product-title">
+    <div class="modal-dialog modal-dialog-lg">
+      <button type="button" class="modal-close-btn" id="btn-close-modal" aria-label="Đóng cửa sổ chi tiết">&times;</button>
+      <div class="modal-body" id="product-modal-content">
+        <!-- Render chi tiết sản phẩm bởi UI.openProductModal() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DRAWER: SHOPPING CART ================= -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng của bạn">
+    <div class="cart-drawer-header">
+      <div class="cart-header-title">
+        <i class="bi bi-bag-check-fill text-primary"></i>
+        <h3>Giỏ Hàng Sinh Viên</h3>
+      </div>
+      <button type="button" class="btn-close-cart" id="btn-close-cart" aria-label="Đóng giỏ hàng">&times;</button>
+    </div>
+
+    <!-- Trạng thái giỏ hàng rỗng -->
+    <div class="cart-drawer-empty" id="cart-drawer-empty" style="display: none;">
+      <div class="empty-cart-icon">
+        <i class="bi bi-cart-x"></i>
+      </div>
+      <h4>Giỏ hàng của bạn đang trống!</h4>
+      <p>Hãy khám phá các thiết bị công nghệ trợ giá và thêm món đồ bạn thích vào giỏ nhé.</p>
+      <button type="button" class="btn btn-primary" onclick="UI.closeCartDrawer()">
+        Tiếp tục xem sản phẩm
+      </button>
+    </div>
+
+    <!-- Danh sách sản phẩm trong giỏ -->
+    <div class="cart-drawer-items" id="cart-drawer-items">
+      <!-- Sinh động bởi UI.renderCartDrawer() -->
+    </div>
+
+    <!-- Chân trang giỏ hàng: Voucher & Thanh toán -->
+    <div class="cart-drawer-footer" id="cart-drawer-footer">
+      <div class="voucher-box">
+        <div class="voucher-input-group">
+          <input type="text" id="voucher-input" placeholder="Nhập mã: SINHVIEN10" uppercase />
+          <button type="button" id="btn-apply-voucher" class="btn-apply-voucher">Áp dụng</button>
+        </div>
+        <span class="voucher-hint">💡 Gợi ý mã: <strong>SINHVIEN10</strong> (-10%), <strong>FREESHIP</strong></span>
+      </div>
+
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Tạm tính:</span>
+          <strong id="cart-subtotal">0 VNĐ</strong>
+        </div>
+        <div class="summary-row text-success" id="cart-discount-row" style="display: none;">
+          <span>Giảm giá sinh viên:</span>
+          <strong id="cart-discount">-0 VNĐ</strong>
+        </div>
+        <div class="summary-row">
+          <span>Phí giao tận KTX:</span>
+          <strong id="cart-shipping">0 VNĐ</strong>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-row total-row">
+          <span>Tổng tiền thanh toán:</span>
+          <strong class="text-primary total-amount" id="cart-final-total">0 VNĐ</strong>
+        </div>
+      </div>
+
+      <button type="button" class="btn-checkout-now" id="btn-proceed-checkout">
+        <i class="bi bi-credit-card-fill"></i> Tiến hành đặt hàng
+      </button>
+    </div>
+  </aside>
+
+  <!-- ================= MODAL: CHECKOUT & REAL-TIME VALIDATION ================= -->
+  <div class="modal-overlay" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-modal-title">
+    <div class="modal-dialog modal-dialog-md">
+      <button type="button" class="modal-close-btn" id="btn-close-checkout" aria-label="Đóng">&times;</button>
+      <div class="modal-header">
+        <h3 class="modal-title" id="checkout-modal-title">
+          <i class="bi bi-shield-lock-fill text-primary"></i> Thông Tin Giao Hàng Sinh Viên
+        </h3>
+        <p class="modal-subtitle">Xác thực thời gian thực (Real-time Validation) - Trợ giá cho sinh viên LHU</p>
+      </div>
+
+      <form id="checkout-form" class="checkout-form" novalidate>
+        <!-- Họ và tên -->
+        <div class="form-group">
+          <label for="order-fullname">Họ và tên sinh viên <span class="text-danger">*</span></label>
+          <div class="input-with-icon">
+            <i class="bi bi-person"></i>
+            <input type="text" id="order-fullname" placeholder="Ví dụ: Đinh Hữu Phước" required />
+          </div>
+          <div class="validation-feedback"></div>
+        </div>
+
+        <!-- Số điện thoại (Regex VN) -->
+        <div class="form-group">
+          <label for="order-phone">Số điện thoại liên lạc (10 số) <span class="text-danger">*</span></label>
+          <div class="input-with-icon">
+            <i class="bi bi-telephone"></i>
+            <input type="tel" id="order-phone" placeholder="Ví dụ: 0912345678" maxlength="10" required />
+          </div>
+          <div class="validation-feedback"></div>
+        </div>
+
+        <!-- Mã số sinh viên (MSSV) -->
+        <div class="form-group">
+          <label for="order-studentid">Mã số sinh viên (MSSV LHU) <span class="text-danger">*</span></label>
+          <div class="input-with-icon">
+            <i class="bi bi-card-heading"></i>
+            <input type="text" id="order-studentid" placeholder="Ví dụ: 125000155" required />
+          </div>
+          <div class="validation-feedback"></div>
+        </div>
+
+        <!-- Địa chỉ giao hàng KTX / Phòng trọ -->
+        <div class="form-group">
+          <label for="order-address">Địa chỉ phòng trọ / Ký túc xá LHU <span class="text-danger">*</span></label>
+          <div class="input-with-icon">
+            <i class="bi bi-geo-alt"></i>
+            <input type="text" id="order-address" placeholder="Ví dụ: Phòng 302, KTX Cơ sở 1 LHU hoặc địa chỉ trọ" required />
+          </div>
+          <div class="validation-feedback"></div>
+        </div>
+
+        <!-- Phương thức thanh toán -->
+        <div class="form-group">
+          <label class="form-label">Phương thức thanh toán:</label>
+          <div class="payment-methods-grid">
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="cod" checked />
+              <div class="payment-card">
+                <i class="bi bi-cash-stack"></i>
+                <div class="payment-info">
+                  <strong>Thanh toán khi nhận (COD)</strong>
+                  <span>Nhận hàng tại phòng KTX rồi thanh toán tiền mặt</span>
+                </div>
+              </div>
+            </label>
+            <label class="payment-option">
+              <input type="radio" name="payment_method" value="vietqr" />
+              <div class="payment-card">
+                <i class="bi bi-qr-code-scan"></i>
+                <div class="payment-info">
+                  <strong>Chuyển khoản VietQR Sinh Viên</strong>
+                  <span>Quét mã ngân hàng qua App sinh viên miễn phí 24/7</span>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Tóm tắt đơn hàng ngắn -->
+        <div class="checkout-summary-box">
+          <h4 class="checkout-sum-title"><i class="bi bi-receipt"></i> Đơn hàng chuẩn bị gửi:</h4>
+          <div id="checkout-summary-list" class="checkout-sum-list"></div>
+          <div class="checkout-final-line">
+            <span>Tổng thanh toán:</span>
+            <strong id="checkout-total-amount" class="text-primary fs-5">0 VNĐ</strong>
+          </div>
+        </div>
+
+        <!-- Submit Button: Bị disable khi form chưa hợp lệ -->
+        <button type="submit" id="btn-submit-order" class="btn-submit-order" disabled>
+          <i class="bi bi-check2-circle"></i> Xác nhận đặt hàng
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: ORDER SUCCESS ================= -->
+  <div class="modal-overlay" id="success-modal" role="dialog" aria-modal="true">
+    <div class="modal-dialog modal-dialog-md">
+      <div class="modal-body" id="success-modal-content">
+        <!-- Render hóa đơn thành công bởi UI.showOrderSuccessModal() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TOAST NOTIFICATION CONTAINER ================= -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ================= JAVASCRIPT MODULES ================= -->
+  <!-- Module 1: Dữ liệu tĩnh mảng Object (Thử thách 3) -->
+  <script src="js/data.js"></script>
+
+  <!-- Module 2: Xử lý hiển thị DOM & Modal (Thử thách 1, 3) -->
+  <script src="js/ui.js"></script>
+
+  <!-- Module 3: Logic chính, Real-time Search, Cart, Form Validation (Thử thách 2, 3) -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>

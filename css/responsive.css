@@ -1,0 +1,252 @@
+/**
+ * ============================================================================
+ * STYLESHEET: RESPONSIVE STYLES (css/responsive.css)
+ * Học phần: 111101 - Thiết Kế Web · Đại học Lạc Hồng (LHU)
+ * Tuần 13: PBL Milestone 1 - Sprint 1 (Planning & Core UI)
+ * Tối ưu hóa hiển thị Mobile-First & Responsive trên mọi thiết bị
+ * ============================================================================
+ */
+
+/* 1. TABLET & LAPTOP (MAX-WIDTH: 1024PX) */
+@media screen and (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+
+  .hero-card-showcase {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .hero-img {
+    height: 320px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .policy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+}
+
+/* 2. TABLET PORTRAIT (MAX-WIDTH: 768PX) */
+@media screen and (max-width: 768px) {
+  .top-announcement-bar {
+    display: none; /* Ẩn bớt để tối ưu màn hình nhỏ */
+  }
+
+  .navbar-container {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .brand-logo {
+    order: 1;
+  }
+
+  .header-actions {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .voucher-quick-pill {
+    display: none; /* Ẩn voucher pill trên header mobile */
+  }
+
+  .header-search-wrap {
+    order: 3;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-toolbar {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .product-card-body {
+    padding: 12px;
+  }
+
+  .product-title {
+    font-size: 0.9rem;
+  }
+
+  .product-price-current {
+    font-size: 1.05rem;
+  }
+
+  .modal-product-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .modal-main-img {
+    height: 240px;
+  }
+
+  .modal-product-title {
+    font-size: 1.25rem;
+  }
+
+  .cart-drawer {
+    width: 100%;
+    right: -100%;
+  }
+
+  .payment-methods-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .toast-container {
+    left: 16px;
+    right: 16px;
+    top: 16px;
+  }
+
+  .toast-item {
+    min-width: unset;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* 3. MOBILE SMALL (MAX-WIDTH: 480PX) */
+@media screen and (max-width: 480px) {
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .logo-icon-wrap {
+    width: 38px;
+    height: 38px;
+    font-size: 1.25rem;
+  }
+
+  .logo-name {
+    font-size: 1.2rem;
+  }
+
+  .btn-cart-trigger {
+    padding: 7px 14px;
+  }
+
+  .cart-trigger-label {
+    display: none; /* Chỉ hiển thị icon giỏ hàng trên mobile nhỏ */
+  }
+
+  .hero-section {
+    padding: 28px 0 24px;
+  }
+
+  .hero-title {
+    font-size: 1.65rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .hero-card-showcase .hero-img {
+    height: 220px;
+  }
+
+  .floating-badge {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr; /* 1 cột trên điện thoại nhỏ để hiển thị đầy đủ thông tin */
+    gap: 16px;
+  }
+
+  .product-image-wrap {
+    height: 200px;
+  }
+
+  .policy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .policy-card {
+    padding: 24px 16px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .modal-dialog {
+    max-height: 95vh;
+    border-radius: var(--radius-lg);
+  }
+
+  .modal-product-layout {
+    padding: 16px;
+  }
+
+  .modal-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .modal-qty-control {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .btn-modal-add-cart {
+    width: 100%;
+  }
+
+  .checkout-form {
+    padding: 16px;
+  }
+
+  .success-box {
+    padding: 24px 14px;
+  }
+}
