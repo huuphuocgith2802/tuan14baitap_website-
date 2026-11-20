@@ -17,8 +17,8 @@
 
 ## 🌐 ĐƯỜNG DẪN TRẢI NGHIỆM TRỰC TIẾP (LIVE DEMO)
 
-* 🔗 **Website chạy Live trên GitHub Pages:** [https://huuphuocgith2802.github.io/tuan14baitap_website/](https://huuphuocgith2802.github.io/tuan14baitap_website/)
-* 📦 **Repository GitHub:** [https://github.com/huuphuocgith2802/tuan14baitap_website](https://github.com/huuphuocgith2802/tuan14baitap_website)
+* 🔗 **Website chạy Live trên GitHub Pages:** [https://huuphuocgith2802.github.io/tuan14baitap_website-/](https://huuphuocgith2802.github.io/tuan14baitap_website-/)
+* 📦 **Repository GitHub:** [https://github.com/huuphuocgith2802/tuan14baitap_website-](https://github.com/huuphuocgith2802/tuan14baitap_website-)
 * 👤 **Sinh viên thực hiện:** Đinh Hữu Phước
 * 🆔 **Mã số sinh viên (MSSV):** 125000155
 * 📧 **Email sinh viên LHU:** [125000155@lachong.edu.vn](mailto:125000155@lachong.edu.vn)
@@ -175,13 +175,13 @@ Dưới đây là tóm tắt các câu Prompt tiêu biểu đã sử dụng cùn
 ## 💻 HƯỚNG DẪN CÀI ĐẶT & CHẠY DỰ ÁN
 
 ### Cách 1: Xem trực tiếp trên GitHub Pages (Khuyên dùng)
-Truy cập ngay: [https://huuphuocgith2802.github.io/tuan14baitap_website/](https://huuphuocgith2802.github.io/tuan14baitap_website/)
+Truy cập ngay: [https://huuphuocgith2802.github.io/tuan14baitap_website-/](https://huuphuocgith2802.github.io/tuan14baitap_website-/)
 
 ### Cách 2: Chạy trên máy cục bộ (Local)
 1. Clone repository về máy:
    ```bash
-   git clone https://github.com/huuphuocgith2802/tuan14baitap_website.git
-   cd tuan14baitap_website
+   git clone https://github.com/huuphuocgith2802/tuan14baitap_website-.git
+   cd tuan14baitap_website-
    ```
 2. Mở file `index.html` bằng một trong hai cách:
    * **Cách A (Live Server):** Chuột phải vào `index.html` trong VS Code chọn **"Open with Live Server"**.
@@ -195,7 +195,7 @@ Truy cập ngay: [https://huuphuocgith2802.github.io/tuan14baitap_website/](http
 - [x] **File `prompt_log.md` ghi lại hành trình "đối thoại" với AI:** Xem chi tiết tại [prompt_log.md](file:///c:/Users/huuph/OneDrive/Desktop/tuan14_website/prompt_log.md).
 - [x] **Bản Pitching ngắn gọn thể hiện giá trị của dự án:** Xem chi tiết tại [docs/pitching.md](file:///c:/Users/huuph/OneDrive/Desktop/tuan14_website/docs/pitching.md).
 - [x] **Biên bản Daily Stand-up đầu giờ:** Xem chi tiết tại [docs/standup_notes.md](file:///c:/Users/huuph/OneDrive/Desktop/tuan14_website/docs/standup_notes.md).
-- [x] **Website đã triển khai thành công lên GitHub Pages chạy Live:** [https://huuphuocgith2802.github.io/tuan14baitap_website/](https://huuphuocgith2802.github.io/tuan14baitap_website/).
+- [x] **Website đã triển khai thành công lên GitHub Pages chạy Live:** [https://huuphuocgith2802.github.io/tuan14baitap_website-/](https://huuphuocgith2802.github.io/tuan14baitap_website-/).
 
 ---
 

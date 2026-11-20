@@ -3,7 +3,7 @@
 ### HỌC PHẦN 111101 · THIẾT KẾ WEB · ĐẠI HỌC LẠC HỒNG (LHU)
 **Người thuyết trình:** Đinh Hữu Phước — **MSSV:** 125000155  
 **Thời lượng trình bày:** 2 - 3 phút (Chuẩn Pitching Tech Hackathon)  
-**Live Demo:** [https://huuphuocgith2802.github.io/tuan14baitap_website/](https://huuphuocgith2802.github.io/tuan14baitap_website/)
+**Live Demo:** [https://huuphuocgith2802.github.io/tuan14baitap_website-/](https://huuphuocgith2802.github.io/tuan14baitap_website-/)
 
 ---
 
