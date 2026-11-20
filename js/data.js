@@ -2,21 +2,36 @@
  * ============================================================================
  * MODULE 1: DATA (js/data.js)
  * Học phần: 111101 - Thiết Kế Web · Đại học Lạc Hồng (LHU)
- * Tuần 13: PBL Milestone 1 - Sprint 1 (Planning & Core UI)
- * Thử thách 3 (Clean Code): Quản lý toàn bộ cấu trúc dữ liệu Object
+ * Tuần 14: PBL Milestone 2 - Sprint 2 (Logic Thông Minh & Kiểm Thử - Final Push)
+ * Tiêu chí DoD & Clean Code: Quản lý cấu trúc dữ liệu Object mở rộng & Hỗ trợ nạp JSON Async
  * ============================================================================
  */
 
-// 1. Danh mục sản phẩm (Categories)
+// 1. Cấu hình hệ thống chung (App Configuration)
+const APP_CONFIG = {
+  appName: "UniTech Campus Store",
+  campus: "Đại học Lạc Hồng (LHU)",
+  courseCode: "111101 - Thiết Kế Web",
+  sprint: "Sprint 2 (Final Push)",
+  student: "Đinh Hữu Phước",
+  studentId: "125000155",
+  shippingFee: 25000,
+  freeShippingThreshold: 500000,
+  currency: "VNĐ",
+  jsonPath: "data/products.json"
+};
+
+// 2. Danh mục sản phẩm (Categories)
 const CATEGORIES = [
-  { id: "all", name: "Tất cả sản phẩm", icon: "bi-grid-fill" },
+  { id: "all", name: "Tất cả thiết bị", icon: "bi-grid-fill" },
   { id: "mouse-keyboard", name: "Chuột & Bàn phím", icon: "bi-keyboard" },
   { id: "audio", name: "Âm thanh & Tai nghe", icon: "bi-headphones" },
-  { id: "charging", name: "Cáp sạc & GaN", icon: "bi-lightning-charge" },
-  { id: "accessories", name: "Setup bàn học & Hub", icon: "bi-laptop" }
+  { id: "charging", name: "Cáp sạc, GaN & Pin", icon: "bi-lightning-charge" },
+  { id: "accessories", name: "Setup bàn học & Hub", icon: "bi-laptop" },
+  { id: "tech-gear", name: "Thiết bị học tập LHU", icon: "bi-mortarboard" }
 ];
 
-// 2. Mảng dữ liệu 12 sản phẩm công nghệ sinh viên (Products Data)
+// 3. Mảng dữ liệu 16 sản phẩm công nghệ sinh viên LHU (Products Data - Fallback an toàn)
 const PRODUCTS = [
   {
     id: 1,
@@ -31,13 +46,14 @@ const PRODUCTS = [
     image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&auto=format&fit=crop&q=80",
     inStock: true,
     stockQuantity: 35,
-    badges: ["Bán chạy", "Silent Click"],
-    shortDesc: "Chuột siêu êm chống ồn 90%, kết nối kép Bluetooth & USB receiver. Phù hợp ngồi thư viện.",
+    badges: ["Bán chạy", "Silent Click", "Trợ giá LHU"],
+    priceTier: "medium",
+    shortDesc: "Chuột siêu êm chống ồn 90%, kết nối kép Bluetooth & USB receiver. Phù hợp ngồi thư viện LHU.",
     specs: {
       "Kết nối": "Bluetooth Low Energy & USB 2.4GHz",
-      "Độ phân giải": "1000 DPI mượt mà",
-      "Thời lượng pin": "18 tháng (1 pin AA)",
-      "Đặc tính": "Silent click chống ồn khi ngồi thư viện LHU",
+      "Độ phân giải": "1000 DPI lướt mượt mà",
+      "Thời lượng pin": "18 tháng (1 pin AA đi kèm)",
+      "Đặc tính": "Silent click chống ồn khi học tại phòng tự học",
       "Bảo hành": "12 tháng 1 đổi 1"
     }
   },
@@ -54,284 +70,406 @@ const PRODUCTS = [
     image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&auto=format&fit=crop&q=80",
     inStock: true,
     stockQuantity: 20,
-    badges: ["Hot Deal", "Đèn RGB"],
+    badges: ["Hot Deal", "Đèn RGB", "Trợ giá LHU"],
+    priceTier: "high",
     shortDesc: "Bàn phím cơ layout 94 phím tối ưu diện tích, Red Switch gõ êm ái, led RGB 16.8 triệu màu.",
     specs: {
-      "Switch": "Custom Red Switch (Linear êm ái)",
-      "Kết nối": "Type-C có dây & Bluetooth 5.0 & 2.4G",
-      "Keycap": "PBT Doubleshot chống mờ",
-      "Tính năng": "Hotswap dễ dàng thay switch tùy thích",
+      "Switch": "Custom Red Switch (Linear êm ái gõ code ban đêm)",
+      "Mạch": "Hotswap 3-pin / 5-pin tùy biến linh hoạt",
+      "Kết nối": "3 chế độ: Type-C có dây, Bluetooth 5.0, Wireless 2.4G",
+      "Keycap": "PBT Doubleshot chống bóng mờ",
       "Bảo hành": "12 tháng chính hãng"
     }
   },
   {
     id: 3,
-    name: "Tai Nghe Chụp Tai Bluetooth Baseus Bowie H1i Hi-Res",
-    category: "audio",
-    categoryName: "Âm thanh & Tai nghe",
-    price: 550000,
-    originalPrice: 750000,
-    discount: 27,
-    rating: 4.7,
-    reviewsCount: 95,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
-    inStock: true,
-    stockQuantity: 18,
-    badges: ["Chống ồn ANC", "Pin 100h"],
-    shortDesc: "Tai nghe chống ồn chủ động ANC -38dB, chứng nhận Hi-Res Audio, thời lượng pin 100 giờ.",
-    specs: {
-      "Chống ồn": "Active Noise Cancelling -38dB",
-      "Chuẩn âm thanh": "Hi-Res Audio & LHDC decoding",
-      "Thời lượng pin": "100 giờ (tắt ANC) / 70 giờ (bật ANC)",
-      "Đệm tai": "Bọt biển nhớ hình êm ái không đau tai",
-      "Bảo hành": "12 tháng"
-    }
-  },
-  {
-    id: 4,
-    name: "Giá Đỡ Laptop Nhôm Xoay 360 Độ Công Thái Học",
-    category: "accessories",
-    categoryName: "Setup bàn học & Hub",
-    price: 249000,
-    originalPrice: 350000,
+    name: "Củ Sạc Nhanh Baseus GaN5 Pro 65W 3 Cổng",
+    category: "charging",
+    categoryName: "Cáp sạc, GaN & Pin",
+    price: 420000,
+    originalPrice: 590000,
     discount: 29,
     rating: 4.9,
-    reviewsCount: 210,
-    image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&auto=format&fit=crop&q=80",
-    inStock: true,
-    stockQuantity: 50,
-    badges: ["Bán chạy", "Xoay 360°"],
-    shortDesc: "Khung hợp kim nhôm chịu tải 10kg, khớp xoay 360 độ tiện thảo luận nhóm và chống mỏi vai gáy.",
-    specs: {
-      "Chất liệu": "Hợp kim nhôm dày dặn, đệm silicon chống trầy",
-      "Tính năng xoay": "Khớp bi xoay 360 độ mượt mà kèm tiếng click",
-      "Tương thích": "Laptop từ 11 đến 17.3 inch và máy tính bảng",
-      "Tản nhiệt": "Mặt đáy khoét thoáng khí giúp máy mát hơn",
-      "Bảo hành": "Trọn đời lỗi cơ khí"
-    }
-  },
-  {
-    id: 5,
-    name: "Củ Sạc Nhanh GaN 65W Ugreen Nexode 3 Cổng Type-C",
-    category: "charging",
-    categoryName: "Cáp sạc & GaN",
-    price: 499000,
-    originalPrice: 650000,
-    discount: 23,
-    rating: 4.9,
-    reviewsCount: 176,
+    reviewsCount: 215,
     image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
     inStock: true,
-    stockQuantity: 40,
-    badges: ["Trợ giá SV", "GaN Tech"],
-    shortDesc: "Công nghệ Gallium Nitride siêu nhỏ gọn, sạc cùng lúc MacBook, iPhone và iPad tốc độ tối đa.",
+    stockQuantity: 50,
+    badges: ["Flash Sale", "65W GaN5"],
+    priceTier: "medium",
+    shortDesc: "Công nghệ GaN thế hệ 5 thu nhỏ kích thước 40%, sạc cùng lúc Laptop, iPad và điện thoại an toàn.",
     specs: {
-      "Công suất": "Tối đa 65W chuẩn Power Delivery 3.0",
+      "Công suất": "65W Max chuẩn PD 3.0, QC 4.0+",
       "Cổng ra": "2 cổng Type-C + 1 cổng USB-A",
-      "Bảo vệ": "Chống quá nhiệt, quá tải điện thông minh",
-      "Kích thước": "Nhỏ hơn 50% so với sạc laptop thông thường",
+      "Tản nhiệt": "BCT (Baseus Cooling Technology) siêu mát",
+      "Tương thích": "MacBook, Dell XPS, iPhone, Samsung, Xiaomi",
       "Bảo hành": "18 tháng đổi mới"
     }
   },
   {
-    id: 6,
-    name: "Hub Chuyển Đổi Type-C 7-in-1 Baseus Metal Gleam 4K",
-    category: "accessories",
-    categoryName: "Setup bàn học & Hub",
-    price: 390000,
-    originalPrice: 520000,
-    discount: 25,
-    rating: 4.8,
-    reviewsCount: 114,
-    image: "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=600&auto=format&fit=crop&q=80",
+    id: 4,
+    name: "Tai Nghe Chống Ồn Chủ Động Baseus Bowie H1i ANC",
+    category: "audio",
+    categoryName: "Âm thanh & Tai nghe",
+    price: 750000,
+    originalPrice: 1050000,
+    discount: 29,
+    rating: 4.7,
+    reviewsCount: 94,
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
     inStock: true,
-    stockQuantity: 28,
-    badges: ["Chiếu slide 4K", "Nhôm nguyên khối"],
-    shortDesc: "Cứu cánh khi thuyết trình đồ án trên giảng đường: Cổng HDMI 4K, 3x USB 3.0, khe SD/TF, sạc PD 100W.",
+    stockQuantity: 15,
+    badges: ["Khuyên dùng", "ANC -38dB"],
+    priceTier: "high",
+    shortDesc: "Khử ồn chủ động ANC -38dB, chứng nhận âm thanh Hi-Res Audio, thời lượng pin siêu khủng 100 giờ.",
     specs: {
-      "Cổng xuất hình": "HDMI hỗ trợ 4K@30Hz / 1080P@60Hz",
-      "Cổng dữ liệu": "3 x USB 3.0 truyền tốc độ 5Gbps",
-      "Cổng sạc": "Type-C PD 100W sạc ngược máy tính",
-      "Khe thẻ nhớ": "Đọc đồng thời SD và MicroSD",
-      "Bảo hành": "12 tháng chính hãng"
-    }
-  },
-  {
-    id: 7,
-    name: "Đèn LED Treo Màn Hình Bảo Vệ Mắt Baseus i-wok 2",
-    category: "accessories",
-    categoryName: "Setup bàn học & Hub",
-    price: 399000,
-    originalPrice: 550000,
-    discount: 27,
-    rating: 4.8,
-    reviewsCount: 79,
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&auto=format&fit=crop&q=80",
-    inStock: true,
-    stockQuantity: 22,
-    badges: ["Chống mỏi mắt", "Học đêm"],
-    shortDesc: "Chiếu sáng góc học tập bất đối xứng không gây chói màn hình, 3 chế độ nhiệt màu dịu mắt khi code đêm.",
-    specs: {
-      "Nguồn điện": "Cắm trực tiếp qua cổng USB máy tính 5V/1A",
-      "Nhiệt độ màu": "2800K - 4000K - 5500K (Ấm, Tự nhiên, Trắng)",
-      "Độ hoàn màu": "CRI Ra95 tái tạo màu chân thực",
-      "Điều khiển": "Cảm ứng vô cấp điều chỉnh độ sáng",
+      "Công nghệ khử ồn": "Hybrid ANC -38dB chặn tiếng ồn xung quanh",
+      "Chuẩn âm thanh": "Hi-Res Audio kép không dây LHDC",
+      "Thời lượng pin": "100 giờ (tắt ANC) / 70 giờ (bật ANC)",
+      "Microphone": "4 mic AI lọc tiếng ồn cho bài học online",
       "Bảo hành": "12 tháng"
     }
   },
   {
-    id: 8,
-    name: "Tai Nghe True Wireless Soundpeats Free2 Classic",
-    category: "audio",
-    categoryName: "Âm thanh & Tai nghe",
-    price: 360000,
-    originalPrice: 490000,
-    discount: 26,
-    rating: 4.6,
-    reviewsCount: 130,
-    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80",
+    id: 5,
+    name: "Hub Chuyển Đổi Baseus Metal Gleam 7-in-1 Type-C",
+    category: "accessories",
+    categoryName: "Setup bàn học & Hub",
+    price: 490000,
+    originalPrice: 650000,
+    discount: 25,
+    rating: 4.8,
+    reviewsCount: 110,
+    image: "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=600&auto=format&fit=crop&q=80",
     inStock: true,
-    stockQuantity: 30,
-    badges: ["Giá SV", "Mic lọc ồn"],
-    shortDesc: "Tai nghe nhét tai nhỏ gọn, pin trâu 30 giờ, chống nước IPX5, đàm thoại mic trong trẻo khi học online.",
+    stockQuantity: 28,
+    badges: ["Cần thiết", "HDMI 4K"],
+    priceTier: "medium",
+    shortDesc: "Vỏ hợp kim nhôm tản nhiệt, mở rộng HDMI 4K@60Hz xuất máy chiếu thuyết trình đồ án, 3 USB 3.0, sạc PD 100W.",
     specs: {
-      "Kết nối": "Bluetooth 5.1 kết nối nhanh trong 10m",
-      "Thời lượng pin": "8 giờ 1 lần sạc + hộp sạc nâng lên 30 giờ",
-      "Chống nước": "Chuẩn IPX5 chống mồ hôi và mưa nhẹ",
-      "Khối lượng": "Chỉ 4.06g mỗi tai, đeo cực nhẹ",
+      "Cổng mở rộng": "1 HDMI 4K, 3 USB 3.0, 1 Type-C PD 100W, khe thẻ SD/TF",
+      "Tốc độ truyền": "5Gbps sao chép file lớn tức thì",
+      "Chất liệu": "Hợp kim nhôm nguyên khối anodized",
+      "Tương thích": "Windows, macOS, iPadOS, Android Type-C",
+      "Bảo hành": "12 tháng"
+    }
+  },
+  {
+    id: 6,
+    name: "Đèn Treo Màn Hình Bảo Vệ Mắt Baseus i-Wok 3",
+    category: "accessories",
+    categoryName: "Setup bàn học & Hub",
+    price: 380000,
+    originalPrice: 520000,
+    discount: 27,
+    rating: 4.9,
+    reviewsCount: 160,
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&auto=format&fit=crop&q=80",
+    inStock: true,
+    stockQuantity: 42,
+    badges: ["Bảo vệ mắt", "Cảm ứng"],
+    priceTier: "medium",
+    shortDesc: "Chiếu sáng không đối xứng, không gây chói phản chiếu màn hình máy tính, bảo vệ thị lực khi học đêm.",
+    specs: {
+      "Nhiệt độ màu": "3000K - 6500K (3 chế độ ánh sáng)",
+      "Độ hoàn màu": "Ra > 95 chuẩn màu sắc chân thực",
+      "Điều khiển": "Cảm ứng chạm vô cấp (Stepless Dimming)",
+      "Nguồn điện": "Cổng USB 5V cắm trực tiếp vào máy tính",
+      "Bảo hành": "12 tháng"
+    }
+  },
+  {
+    id: 7,
+    name: "Giá Đỡ Laptop Nhôm Tản Nhiệt Orico Ergonomic Stand",
+    category: "accessories",
+    categoryName: "Setup bàn học & Hub",
+    price: 195000,
+    originalPrice: 280000,
+    discount: 30,
+    rating: 4.8,
+    reviewsCount: 178,
+    image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&auto=format&fit=crop&q=80",
+    inStock: true,
+    stockQuantity: 60,
+    badges: ["Công thái học", "Giá sinh viên", "Trợ giá LHU"],
+    priceTier: "low",
+    shortDesc: "Gấp gọn tiện lợi bỏ balo, 6 nấc chỉnh độ cao chống gù lưng, đệm silicon chống trầy xước máy.",
+    specs: {
+      "Chất liệu": "Hợp kim nhôm dày 4mm cứng cáp",
+      "Khả năng tải trọng": "Chịu lực lên đến 15kg",
+      "Điều chỉnh": "6 mức độ cao từ 15° đến 45°",
+      "Tương thích": "Laptop, MacBook, Tablet từ 11 đến 17.3 inch",
+      "Bảo hành": "Trọn đời lỗi khớp gập"
+    }
+  },
+  {
+    id: 8,
+    name: "Chuột Đứng Công Thái Học Không Dây Delux M618 Mini",
+    category: "mouse-keyboard",
+    categoryName: "Chuột & Bàn phím",
+    price: 460000,
+    originalPrice: 620000,
+    discount: 26,
+    rating: 4.7,
+    reviewsCount: 73,
+    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&auto=format&fit=crop&q=80",
+    inStock: true,
+    stockQuantity: 18,
+    badges: ["Chống mỏi tay", "Coder Pick"],
+    priceTier: "medium",
+    shortDesc: "Thiết kế góc nghiêng tự nhiên 57 độ giải phóng áp lực cổ tay, giải pháp số 1 cho sinh viên lập trình.",
+    specs: {
+      "Kiểu dáng": "Công thái học dọc (Vertical Mouse)",
+      "Độ nhạy": "DPI tùy chỉnh 800-1200-1600-2400",
+      "Pin tích hợp": "Pin sạc Li-ion 1000mAh qua cổng Type-C",
+      "Kết nối": "Bluetooth 4.0 + Wireless 2.4GHz",
       "Bảo hành": "12 tháng"
     }
   },
   {
     id: 9,
-    name: "Cáp Sạc Nhanh C To C 100W Baseus Bọc Dù Siêu Bền 2M",
-    category: "charging",
-    categoryName: "Cáp sạc & GaN",
-    price: 99000,
-    originalPrice: 150000,
-    discount: 34,
+    name: "Bàn Phím Bluetooth Siêu Mỏng Logitech K380 Multi-Device",
+    category: "mouse-keyboard",
+    categoryName: "Chuột & Bàn phím",
+    price: 550000,
+    originalPrice: 750000,
+    discount: 27,
     rating: 4.9,
-    reviewsCount: 340,
-    image: "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?w=600&auto=format&fit=crop&q=80",
+    reviewsCount: 240,
+    image: "https://images.unsplash.com/photo-1541140532154-b024d705b909?w=600&auto=format&fit=crop&q=80",
     inStock: true,
-    stockQuantity: 100,
-    badges: ["Bán chạy #1", "Bọc dù"],
-    shortDesc: "Hỗ trợ sạc nhanh tối đa 100W (20V/5A) tích hợp chip E-Marker, bọc sợi dù Kevlar chống đứt gãy gập.",
+    stockQuantity: 30,
+    badges: ["Best Seller", "3 Thiết bị", "Trợ giá LHU"],
+    priceTier: "medium",
+    shortDesc: "Chuyển đổi tức thì giữa 3 thiết bị Laptop, iPad và điện thoại chỉ với 1 nút bấm Easy-Switch.",
     specs: {
-      "Chiều dài": "2.0 mét thoải mái cắm ổ điện xa",
-      "Công suất": "Hỗ trợ chuẩn PD 100W, sạc laptop/điện thoại",
-      "Tốc độ truyền dữ liệu": "480 Mbps truyền file nhanh",
-      "Độ bền": "Thử nghiệm gập bẻ hơn 10.000 lần",
+      "Phím bấm": "Tròn lõm theo đầu ngón tay, gõ êm mượt",
+      "Kết nối": "Bluetooth 3.0 khoảng cách 10m",
+      "Thời lượng pin": "24 tháng (2 pin AAA)",
+      "Tương thích": "Windows, macOS, iOS, Android, ChromeOS",
       "Bảo hành": "12 tháng 1 đổi 1"
     }
   },
   {
     id: 10,
-    name: "Bàn Di Chuột Da PU Chống Nước Khổ Lớn 80x40cm",
-    category: "accessories",
-    categoryName: "Setup bàn học & Hub",
-    price: 119000,
-    originalPrice: 180000,
-    discount: 34,
-    rating: 4.7,
-    reviewsCount: 165,
-    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&auto=format&fit=crop&q=80",
+    name: "Tai Nghe Bluetooth In-Ear Soundpeats Air4 Lite",
+    category: "audio",
+    categoryName: "Âm thanh & Tai nghe",
+    price: 620000,
+    originalPrice: 850000,
+    discount: 27,
+    rating: 4.8,
+    reviewsCount: 85,
+    image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80",
     inStock: true,
-    stockQuantity: 45,
-    badges: ["Setup góc học", "Chống thấm nước"],
-    shortDesc: "Chất liệu da PU 2 mặt cao cấp, chống bám bụi và chống thấm nước, giúp di chuột mượt mà và êm tay khi code.",
+    stockQuantity: 22,
+    badges: ["LDAC Hi-Res", "Mic AI"],
+    priceTier: "medium",
+    shortDesc: "Codec LDAC giải mã âm thanh chất lượng cao 990kbps, 6 micro chống ồn cuộc gọi AI trong trẻo.",
     specs: {
-      "Kích thước": "80 x 40 cm phủ trọn bàn học",
-      "Chất liệu": "Da PU nguyên miếng cao cấp chống trầy",
-      "Tính năng": "Chống tràn nước, lau sạch dễ dàng",
-      "Màu sắc": "Đen nhám / Xanh Navy sang trọng",
-      "Bảo hành": "6 tháng"
+      "Driver": "Dynamic 13mm tái tạo âm bass sâu chắc",
+      "Độ trễ": "Game Mode siêu thấp 80ms không lệch tiếng",
+      "Thời lượng": "7 giờ nghe liên tục / 30 giờ cùng hộp sạc",
+      "Kháng nước": "Chuẩn IPX4 chống mồ hôi và mưa nhẹ",
+      "Bảo hành": "12 tháng"
     }
   },
   {
     id: 11,
-    name: "Balo Laptop Chống Trộm Chống Thấm Nước 15.6 Inch",
-    category: "accessories",
-    categoryName: "Setup bàn học & Hub",
-    price: 299000,
-    originalPrice: 420000,
+    name: "Pin Sạc Dự Phòng Ugreen 20.000mAh 30W PD Fast Charge",
+    category: "charging",
+    categoryName: "Cáp sạc, GaN & Pin",
+    price: 490000,
+    originalPrice: 690000,
     discount: 29,
-    rating: 4.8,
-    reviewsCount: 92,
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=80",
+    rating: 4.9,
+    reviewsCount: 130,
+    image: "https://images.unsplash.com/photo-1609592806596-b384ffea39de?w=600&auto=format&fit=crop&q=80",
     inStock: true,
-    stockQuantity: 25,
-    badges: ["Trợ giá SV", "Khóa số chống trộm"],
-    shortDesc: "Balo nhiều ngăn tiện ích: ngăn laptop chống sốc dày, cổng sạc USB tích hợp bên hông, quai đeo êm ái.",
+    stockQuantity: 40,
+    badges: ["Pin trâu", "30W Fast", "Trợ giá LHU"],
+    priceTier: "medium",
+    shortDesc: "Dung lượng chuẩn 20.000mAh sạc đầy 4.5 lần iPhone, công suất 30W sạc được cho cả iPad và MacBook Air.",
     specs: {
-      "Kích thước": "Đựng vừa laptop 15.6 inch và giáo trình A4",
-      "Chất liệu": "Vải Oxford cao cấp kháng nước mưa",
-      "Khóa an toàn": "Tích hợp ổ khóa mật mã 3 số",
-      "Cổng sạc": "Có cổng ra USB cắm sạc dự phòng",
-      "Bảo hành": "12 tháng đường may và dây kéo"
+      "Dung lượng": "20.000mAh / 74Wh (đủ điều kiện mang lên máy bay)",
+      "Công suất": "30W PD, QC 3.0 2 chiều",
+      "Cổng sạc": "1 Type-C In/Out + 2 USB-A Out",
+      "Màn hình": "Led hiển thị chính xác % pin còn lại",
+      "Bảo hành": "18 tháng đổi mới"
     }
   },
   {
     id: 12,
-    name: "Bút Cảm Ứng Đa Năng Cho iPad & Máy Tính Bảng Android",
+    name: "Ổ Cứng Di Động SSD Kingston XS1000 1TB USB 3.2 Gen 2",
     category: "accessories",
     categoryName: "Setup bàn học & Hub",
-    price: 260000,
-    originalPrice: 380000,
+    price: 1790000,
+    originalPrice: 2290000,
+    discount: 22,
+    rating: 4.9,
+    reviewsCount: 65,
+    image: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600&auto=format&fit=crop&q=80",
+    inStock: true,
+    stockQuantity: 12,
+    badges: ["Tốc độ cao", "1050MB/s", "Cao cấp"],
+    priceTier: "premium",
+    shortDesc: "Kích thước siêu nhỏ bỏ túi vừa lòng bàn tay, tốc độ đọc 1.050MB/s sao chép đồ án, chạy máy ảo siêu tốc.",
+    specs: {
+      "Dung lượng": "1TB (1000GB) chuẩn lưu trữ",
+      "Tốc độ đọc/ghi": "Lên đến 1.050MB/s và 1.000MB/s",
+      "Chuẩn kết nối": "USB 3.2 Gen 2 Type-C",
+      "Trọng lượng": "Chỉ 28.7 gram siêu nhẹ",
+      "Bảo hành": "60 tháng (5 năm) chính hãng"
+    }
+  },
+  {
+    id: 13,
+    name: "Máy Tính Khoa Học Casio FX-880BTG Chuẩn Thi Quốc Gia",
+    category: "tech-gear",
+    categoryName: "Thiết bị học tập LHU",
+    price: 680000,
+    originalPrice: 820000,
+    discount: 17,
+    rating: 4.9,
+    reviewsCount: 310,
+    image: "https://images.unsplash.com/photo-1594980596870-8aa52a78d8cd?w=600&auto=format&fit=crop&q=80",
+    inStock: true,
+    stockQuantity: 50,
+    badges: ["Chuẩn thi", "Bluetooth QR", "Trợ giá LHU"],
+    priceTier: "medium",
+    shortDesc: "Máy tính khoa học thế hệ ClassWiz mới nhất, hỗ trợ tính toán ma trận, xác suất, đồ thị QR code cho sinh viên kỹ thuật.",
+    specs: {
+      "Tính năng": "Hơn 500 chức năng tính toán chuyên sâu",
+      "Màn hình": "Độ phân giải cao hiển thị biểu thức tự nhiên",
+      "Bản quyền": "Tem chống giả và bảo hành điện tử Bitex",
+      "Đặc biệt": "Được phép mang vào phòng thi tuyển sinh & kết thúc môn",
+      "Bảo hành": "7 năm (1 đổi 1 trong năm đầu)"
+    }
+  },
+  {
+    id: 14,
+    name: "Bút Trình Chiếu Laser Không Dây Baseus Orange Dot",
+    category: "tech-gear",
+    categoryName: "Thiết bị học tập LHU",
+    price: 240000,
+    originalPrice: 350000,
+    discount: 31,
+    rating: 4.8,
+    reviewsCount: 112,
+    image: "https://images.unsplash.com/photo-1588508065123-287b28e013da?w=600&auto=format&fit=crop&q=80",
+    inStock: true,
+    stockQuantity: 35,
+    badges: ["Trình chiếu", "Khoảng cách 100m", "Giá sinh viên"],
+    priceTier: "low",
+    shortDesc: "Công cụ đắc lực cho thuyết trình tiểu luận, đồ án tốt nghiệp tại giảng đường LHU với tia laser đỏ nổi bật.",
+    specs: {
+      "Khoảng cách tia laser": "100 mét rõ ràng trên màn chiếu lớn",
+      "Đầu cắm": "Tích hợp cả USB Type-A và Type-C kép",
+      "Chức năng": "Lật trang, toàn màn hình, hyperlink, đóng mở tab",
+      "Pin": "1 viên pin AAA dùng liên tục 90 ngày",
+      "Bảo hành": "12 tháng"
+    }
+  },
+  {
+    id: 15,
+    name: "Đế Tản Nhiệt Laptop Kèm Hub Led RGB Memo FL08",
+    category: "accessories",
+    categoryName: "Setup bàn học & Hub",
+    price: 310000,
+    originalPrice: 450000,
     discount: 31,
     rating: 4.7,
-    reviewsCount: 84,
-    image: "https://images.unsplash.com/photo-1585336261026-6156e792a728?w=600&auto=format&fit=crop&q=80",
+    reviewsCount: 89,
+    image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&auto=format&fit=crop&q=80",
     inStock: true,
-    stockQuantity: 32,
-    badges: ["Ghi chú bài giảng", "Ngòi POM siêu êm"],
-    shortDesc: "Cảm ứng chính xác không độ trễ, viết vẽ ghi chép bài giảng trên lớp mượt như bút chì thật, pin dùng 15h.",
+    stockQuantity: 25,
+    badges: ["Quạt êm", "Led RGB"],
+    priceTier: "medium",
+    shortDesc: "6 cánh quạt xoáy làm mát cực nhanh giảm 15°C khi biên dịch code hay render video đồ họa đồ án.",
     specs: {
-      "Ngòi bút": "Đầu ngòi POM 1.5mm chống xước màn hình",
-      "Công nghệ": "Chống tì đè tay (Palm Rejection) thông minh",
-      "Thời lượng pin": "Dùng liên tục 15 giờ, sạc Type-C nhanh 30 phút",
-      "Tương thích": "iPad, Samsung Tab, Xiaomi Pad và điện thoại",
+      "Số quạt": "6 quạt xoáy tốc độ 2.600 vòng/phút",
+      "Độ ồn": "Dưới 23dB siêu êm ái",
+      "Đèn hiển thị": "Màn hình LCD chỉnh 6 cấp độ gió",
+      "Cổng kết nối": "2 cổng USB 2.0 cấp nguồn và truyền dữ liệu",
       "Bảo hành": "12 tháng"
+    }
+  },
+  {
+    id: 16,
+    name: "Balo Công Nghệ Chống Nước Chống Gù Tigernu 15.6 Inch",
+    category: "tech-gear",
+    categoryName: "Thiết bị học tập LHU",
+    price: 430000,
+    originalPrice: 590000,
+    discount: 27,
+    rating: 4.9,
+    reviewsCount: 165,
+    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&auto=format&fit=crop&q=80",
+    inStock: true,
+    stockQuantity: 30,
+    badges: ["Chống nước", "Khóa số TSA", "Trợ giá LHU"],
+    priceTier: "medium",
+    shortDesc: "Chất liệu Oxford trượt nước cao cấp bảo vệ laptop khi đi mưa, đệm lưng thoáng khí chống gù hiệu quả.",
+    specs: {
+      "Ngăn chứa": "Chống sốc dày cho Laptop 15.6 inch + iPad 11 inch",
+      "Khóa an toàn": "Khóa kéo kép chống rạch + Khóa số mật khẩu",
+      "Tiện ích": "Cổng sạc USB ra ngoài tiện lợi",
+      "Kích thước": "44 x 30 x 15 cm vừa vặn",
+      "Bảo hành": "3 năm đường may và khóa kéo"
     }
   }
 ];
 
-// 3. Danh sách Voucher khuyến mãi sinh viên (Vouchers)
+// 4. Danh sách mã giảm giá sinh viên LHU (Vouchers)
 const VOUCHERS = {
-  "SINHVIEN10": {
+  SINHVIEN10: {
     code: "SINHVIEN10",
     discountPercent: 10,
-    description: "Giảm 10% tổng đơn hàng dành riêng cho sinh viên LHU",
-    minOrder: 100000
+    minOrder: 200000,
+    description: "Giảm ngay 10% cho sinh viên Đại học Lạc Hồng (Áp dụng đơn từ 200.000 VNĐ)"
   },
-  "FREESHIP": {
+  FREESHIP: {
     code: "FREESHIP",
     discountAmount: 25000,
-    description: "Miễn phí vận chuyển tận ký túc xá / phòng trọ (Giảm 25.000đ)",
-    minOrder: 200000
+    minOrder: 150000,
+    description: "Miễn phí giao hàng tận phòng KTX / trọ LHU (Giảm 25.000 VNĐ)"
   },
-  "UNITECH50K": {
-    code: "UNITECH50K",
-    discountAmount: 50000,
-    description: "Giảm trực tiếp 50.000đ cho đơn hàng từ 500.000đ",
-    minOrder: 500000
+  LHUVIP: {
+    code: "LHUVIP",
+    discountPercent: 15,
+    minOrder: 800000,
+    description: "Đặc quyền thủ khoa / cán bộ lớp LHU: Giảm 15% đơn hàng từ 800.000 VNĐ"
   }
 };
 
-// 4. Cấu hình hệ thống (System Config)
-const APP_CONFIG = {
-  storeName: "UniTech - Campus Store",
-  schoolName: "Trường Đại học Lạc Hồng (LHU)",
-  courseCode: "111101 · Thiết Kế Web",
-  shippingFee: 25000,
-  freeShippingThreshold: 600000,
-  currency: "VNĐ"
+// 5. Module tải dữ liệu linh hoạt (DataLoader Service)
+const DataLoader = {
+  /**
+   * Tải danh sách sản phẩm bất đồng bộ từ file JSON với fallback mảng Object local
+   * @returns {Promise<Array>}
+   */
+  async fetchProducts() {
+    // Nếu chạy qua giao thức HTTP/HTTPS (Live Server, GitHub Pages)
+    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+      try {
+        const response = await fetch(APP_CONFIG.jsonPath);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        console.log(`[DataLoader] Đã tải thành công ${data.products?.length || 0} sản phẩm từ ${APP_CONFIG.jsonPath}`);
+        return data.products || PRODUCTS;
+      } catch (err) {
+        console.warn("[DataLoader] Không thể fetch JSON, tự động chuyển sang Fallback Object data:", err);
+        return PRODUCTS;
+      }
+    }
+    // Nếu mở trực tiếp file HTML (file://), trình duyệt chặn fetch CORS -> Dùng Fallback
+    console.log("[DataLoader] Chế độ file local (file://), sử dụng trực tiếp PRODUCTS Object trong data.js");
+    return PRODUCTS;
+  }
 };
 
-// Xuất các biến ra window để dùng toàn cục trong trình duyệt
-if (typeof window !== "undefined") {
-  window.CATEGORIES = CATEGORIES;
-  window.PRODUCTS = PRODUCTS;
-  window.VOUCHERS = VOUCHERS;
-  window.APP_CONFIG = APP_CONFIG;
-}
+// Đính kèm các biến vào đối tượng Window để các module khác sử dụng an toàn
+window.APP_CONFIG = APP_CONFIG;
+window.CATEGORIES = CATEGORIES;
+window.PRODUCTS = PRODUCTS;
+window.VOUCHERS = VOUCHERS;
+window.DataLoader = DataLoader;
