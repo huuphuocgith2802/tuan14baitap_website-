@@ -318,3 +318,78 @@ Nhóm phân chia 10 Issues chi tiết trên GitHub theo chuẩn Agile/Scrum:
 - [x] Phân chia công việc rõ ràng trên GitHub với bảng 10 Issues có người phụ trách cụ thể.
 - [x] Có bản vẽ phác thảo Wireframe (cả dạng sơ đồ cấu trúc và giao diện chạy trực tiếp).
 - [x] Đã khởi tạo Git Repository và đẩy toàn bộ mã nguồn lên GitHub.
+
+
+---
+
+# GIAI ĐOẠN 2 (SPRINT 2 - TUẦN 14): LOGIC THÔNG MINH & KIỂM THỬ (FINAL PUSH)
+## HỌC PHẦN 111101 · THIẾT KẾ WEB · ĐẠI HỌC LẠC HỒNG (LHU)
+**Mục tiêu PBL:** Thực thi giải pháp, nâng cấp tính năng JavaScript Vibe Logic và kiểm thử chất lượng sản phẩm toàn diện trước buổi Demo Hackathon (Tuần 15).
+
+---
+
+## 12. SPRINT 1 REVIEW & RETROSPECTIVE (ĐÁNH GIÁ KẾT QUẢ TUẦN 13)
+
+### 12.1. Đánh giá những gì đã làm tốt (What Went Well)
+* Khung giao diện HTML5 Semantic và hệ thống biến CSS đồng bộ được thiết lập vững chắc.
+* Cấu trúc mã nguồn 3 module tách biệt (`data.js`, `ui.js`, `app.js`) giúp việc mở rộng tính năng thuận tiện, giảm xung đột mã.
+* Đã vượt qua 3 thử thách cốt lõi: 100% Dynamic Rendering, Real-time Live Search và Real-time Form Validation cơ bản.
+
+### 12.2. Điểm cần khắc phục & nâng cấp trong Sprint 2 (Areas for Improvement)
+* **Hiệu năng tìm kiếm:** Tìm kiếm khi gõ nhanh (fast typing) gọi hàm render DOM liên tục chưa có bộ đệm (Debounce), gây tốn tài nguyên trình duyệt.
+* **Bộ lọc đơn giản:** Mới chỉ lọc theo một tiêu chí (Category hoặc Search query), chưa hỗ trợ lọc kết hợp đa tiêu chí (Combined Filter: Danh mục + Khoảng giá + Badge + Sắp xếp giá/sao).
+* **Nguồn dữ liệu:** Dữ liệu mới chỉ nằm trong biến JavaScript toàn cục, cần chuẩn hóa thành file `data/products.json` độc lập và hỗ trợ tải bất đồng bộ (Async Loading).
+* **Trải nghiệm cá nhân hóa:** Thiếu chế độ Dark / Light Mode thân thiện cho sinh viên học bài ban đêm và thiếu tính năng lưu sản phẩm yêu thích (Wishlist).
+* **Kiểm thử khắt khe:** Cần thực hiện kiểm thử console nghiêm ngặt (Zero Console Errors/Warnings) và audit độ hiển thị trên nhiều độ phân giải điện thoại di động (Responsive mobile < 375px).
+
+---
+
+## 13. DEFINITION OF DONE (DoD) - TIÊU CHUẨN HOÀN THÀNH TÍNH NĂNG TRONG SPRINT 2
+
+Một tính năng được gọi là **"XONG (DONE)"** khi và chỉ khi đạt đủ 4 tiêu chí cốt lõi sau:
+1. **Chạy đúng logic 100%:** Đáp ứng đúng yêu cầu của User Story, xử lý mượt mà cả trường hợp chuẩn lẫn trường hợp ngoại lệ (Edge Cases: dữ liệu rỗng, đầu vào sai định dạng, mạng yếu).
+2. **Không lỗi Console:** Mở Console (F12) trên trình duyệt ở mọi kịch bản thao tác không có bất kỳ dòng chữ đỏ (Error) hay cảnh báo vàng (Warning) nào.
+3. **Hiển thị tốt trên Mobile:** Giao diện co giãn hoàn hảo từ màn hình di động nhỏ nhất (375px), tablet (768px) đến desktop rộng (1440px), không bị vỡ layout hay xuất hiện thanh cuộn ngang ngoài ý muốn.
+4. **Code sạch (Đã qua AI Refactor):** Mã nguồn chuẩn ES6+ Modular, đặt tên hàm/biến trực quan, tuân thủ nguyên tắc Single Responsibility, có comment JSDoc giải thích logic phức tạp.
+
+---
+
+## 14. DANH SÁCH TÍNH NĂNG VIBE LOGIC NÂNG CẤP TRONG SPRINT 2
+
+```mermaid
+graph TD
+    A["UniTech Campus Store (Sprint 2)"] --> B["1. Dữ liệu JSON & Async Loader"]
+    A --> C["2. Bộ Lọc Đa Tiêu Chí & Debounce"]
+    A --> D["3. Real-time Form Validation"]
+    A --> E["4. Dark/Light Mode & Wishlist"]
+    A --> F["5. Agile & DoD Inspector Modal"]
+
+    B --> B1["products.json (16+ thiết bị)"]
+    B --> B2["Async Fetch + Fallback Offline"]
+
+    C --> C1["Debounce 250ms Live Search"]
+    C --> C2["Lọc Khoảng Giá (<300k, 300-700k, >700k)"]
+    C --> C3["Lọc theo Badge (Flash Sale, Trợ giá LHU)"]
+    C --> C4["Chip trạng thái lọc & Empty State đẹp"]
+
+    D --> D1["Regex MSSV LHU (9-10 chữ số)"]
+    D --> D2["Regex SĐT Việt Nam (03,05,07,08,09)"]
+    D --> D3["Điểm nhận hàng KTX/Cơ sở LHU"]
+    D --> D4["Mã vận đơn điện tử LHU-ORDER-xxx"]
+
+    E --> E1["Chuyển Theme Sáng/Tối mượt mà"]
+    E --> E2["Thả tim Wishlist lưu LocalStorage"]
+
+    F --> F1["Bảng tự đánh giá DoD trực quan"]
+    F --> F2["Biên bản Daily Stand-up ngay trên web"]
+```
+
+---
+
+## 15. ROADMAP HƯỚNG TỚI BUỔI DEMO HACKATHON (TUẦN 15)
+
+* **Tuần 14 (Hiện tại):** Hoàn thiện 100% Vibe Logic, Kiểm thử chất lượng (DoD), Hoàn tất `prompt_log.md`, `README.md` và đẩy lên GitHub Pages.
+* **Tuần 15 (Hackathon Demo):**
+  - Trình bày Pitching 2 phút trước hội đồng giảng viên LHU.
+  - Trình diễn Live Demo trực tiếp từ link GitHub Pages.
+  - Phản biện giải pháp kỹ thuật, chia sẻ kinh nghiệm ứng dụng AI trong quy trình Vibe Coding.
